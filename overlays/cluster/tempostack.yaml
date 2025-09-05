@@ -3,7 +3,7 @@ kind: TempoStack
 metadata:
   name: tempo-stack
   namespace: openshift-tempo-operator
-   annotations:
+  annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   storage:
