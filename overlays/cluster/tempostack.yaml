@@ -2,7 +2,9 @@ apiVersion: tempo.grafana.com/v1alpha1
 kind: TempoStack
 metadata:
   name: tempo-stack
-  namespace: tempo-observability
+  namespace: openshift-tempo-operator
+   annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   storage:
     backend: pvc
