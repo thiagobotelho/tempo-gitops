@@ -19,7 +19,7 @@ tempo-gitops/
 ├── overlays/
 │   ├── cluster/              # Overlay para instalação no cluster
 │   │   ├── kustomization.yaml
-│   └── └── tempo.yaml        # Definição do TempoStack               
+│   └── └── tempostack.yaml   # Definição do TempoStack               
 │
 └── README.md                 # Este arquivo
 ```
@@ -52,8 +52,7 @@ Você deve ver os pods do **tempo-operator** em execução.
 ## 🔍 Observações
 
 - O canal do Operator utilizado: **stable**
-- O namespace padrão utilizado: **tempo-system**
-- Para produção, recomenda-se configurar `TLS`, `StorageClass` e `backend S3` no manifest `tempostack.yaml`.
+- O namespace padrão utilizado: **openshift-tempo-operator**
 
 ---
 
