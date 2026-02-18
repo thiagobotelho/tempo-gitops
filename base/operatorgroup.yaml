@@ -5,6 +5,4 @@ metadata:
   namespace: openshift-tempo-operator
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-spec:
-  targetNamespaces:
-    - openshift-tempo-operator
+spec: {}
