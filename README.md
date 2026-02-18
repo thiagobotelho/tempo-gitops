@@ -17,11 +17,11 @@ tempo-gitops/
 │   └── subscription.yaml     # Subscription para instalar o Operator Tempo
 │
 ├── overlays/
-│   ├── cluster/              # Overlay para instalação no cluster
+│   ├── cluster/                   # Overlay para instalação no cluster
 │   │   ├── kustomization.yaml
-│   └── └── tempostack.yaml   # Definição do TempoStack               
+│   └── └── tempomonolithic.yaml   # Definição do TempoStack               
 │
-└── README.md                 # Este arquivo
+└── README.md                      # Este arquivo
 ```
 
 ---
