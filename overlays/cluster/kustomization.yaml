@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - tempostack.yaml
+  - tempomonolithic.yaml
 
 commonLabels:
   app.kubernetes.io/managed-by: argocd
