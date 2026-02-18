@@ -1,106 +1,31 @@
 apiVersion: tempo.grafana.com/v1alpha1
-kind: TempoStack
+kind: TempoMonolithic
 metadata:
-  name: tempo-stack
+  name: tempo-monolithic
   namespace: openshift-tempo-operator
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
+  management: Managed
   storage:
-    backend: pvc
-    size: 50Gi                    
-    storageClassName: crc-csi-hostpath-provisioner   
-  replicationFactor: 1            
-  storageRetentions:
-    global: 168h                  
-  template:
-    gateway:
-      enabled: true
-      route:
-        enabled: true           
-    distributor:
-      replicas: 2
-      resources:
-        requests:
-          cpu: 200m
-          memory: 512Mi
-        limits:   
-          cpu: "1" 
-          memory: 1Gi
-    ingester:
-      replicas: 2
-      resources:
-        requests:
-          cpu: 500m
-          memory: 1Gi
-        limits:
-          cpu: "2"
-          memory: 2Gi
-    compactor:
-      replicas: 1
-      resources:
-        requests:
-          cpu: 200m
-          memory: 512Mi
-        limits:
-          cpu: "1"
-          memory: 1Gi
-    querier:
-      replicas: 2
-      resources:
-        requests:
-          cpu: 200m
-          memory: 512Mi
-        limits:
-          cpu: "1"
-          memory: 1Gi
-    queryFrontend:
-      replicas: 2
-      resources:
-        requests:
-          cpu: 200m
-          memory: 512Mi
-        limits:
-          cpu: "1"
-          memory: 1Gi
-  metricsGenerator:
-    enabled: true
-    replicas: 1
-    resources:
-      requests:
-        cpu: 200m
-        memory: 512Mi
-      limits:
-        cpu: "1"
-        memory: 1Gi
-    storage:
-      backend: pvc
-      size: 10Gi
-      storageClassName: crc-csi-hostpath-provisioner
-    processors:
-      spanMetrics:
-        intrinsicDimensions:
-          service: true
-          spanName: true
-          spanKind: true
-          statusCode: true
-          statusMessage: false
-        dimensions:
-          - deployment.environment
-        enableTargetInfo: true
-      serviceGraphs:
-        wait: 15s
-        maxItems: 50000
-        workers: 10
-        histogramBuckets: [0.1, 0.3, 0.5, 1, 2, 4]
-        dimensions: [service.name, service.namespace]
-        enableClientServerPrefix: true
-        enableVirtualNodeLabel: true
-    remoteWrite:
-      - url: http://prometheus-operated.monitoring.svc:9090/api/v1/write
-  overrides:
-  defaults:
-    metrics_generator:
-      processors:
-        - span-metrics
-        - service-graphs
+    traces:
+      backend: pv
+      size: 50Gi                    
+      storageClassName: crc-csi-hostpath-provisioner   
+  ingestion:
+    otlp:
+      grpc:
+        enabled: true
+      http:
+        enabled: true       
+  jaegerui:
+    enabled: false
+    route:
+      enabled: false
+      termination: edge
+  observability:
+    metrics:
+      serviceMonitors:
+        enabled: true
+      prometheusRules:
+        enabled: true
