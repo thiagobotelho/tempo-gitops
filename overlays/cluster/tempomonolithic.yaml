@@ -10,14 +10,15 @@ spec:
   storage:
     traces:
       backend: pv
-      size: 50Gi                    
-      storageClassName: crc-csi-hostpath-provisioner   
+      # Retenção em PV local: pequeno o bastante para CRC e persistente.
+      size: 10Gi
+      storageClassName: crc-csi-hostpath-provisioner
   ingestion:
     otlp:
       grpc:
         enabled: true
       http:
-        enabled: true       
+        enabled: true
   jaegerui:
     enabled: false
     route:
