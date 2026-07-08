@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "4"
 spec:
   management: Managed
-  timeout: 60s
+  timeout: 1m0s
   storage:
     traces:
       backend: pv
