@@ -17,7 +17,7 @@ com exemplares. O Grafana correlaciona métricas, traces e logs.
 ## Deploy
 
 ```bash
-oc apply -k overlays/cluster
+oc apply -k overlays/desenvolvimento
 oc -n openshift-tempo-operator get subscription,csv,pods
 oc -n openshift-tempo-operator get tempomonolithic,pvc,service
 ```
@@ -25,7 +25,7 @@ oc -n openshift-tempo-operator get tempomonolithic,pvc,service
 Validação declarativa:
 
 ```bash
-oc kustomize overlays/cluster >/tmp/tempo.yaml
+oc kustomize overlays/desenvolvimento >/tmp/tempo.yaml
 oc apply --dry-run=server -f /tmp/tempo.yaml
 ```
 
@@ -54,3 +54,24 @@ criptografia, políticas de retenção e sizing baseados no volume de spans.
 
 Referências: [Distributed Tracing no OpenShift](https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/distributed_tracing/)
 e [Grafana Tempo](https://grafana.com/docs/tempo/latest/).
+
+## Ambientes e validação
+
+```bash
+oc kustomize overlays/desenvolvimento >/tmp/tempo-dev.yaml
+oc kustomize overlays/aceite >/tmp/tempo-aceite.yaml
+oc kustomize overlays/producao >/tmp/tempo-prod.yaml
+oc apply --dry-run=client -k overlays/desenvolvimento
+```
+
+`storageClassName` não é fixado; o cluster usa a StorageClass padrão ou o
+overlay deve patchar a classe. `aceite` e `producao` aumentam o tamanho do PVC,
+mas produção real deve avaliar `TempoStack` com object storage/HA. Veja
+`docs/AMBIENTES.md`.
+
+## Automatizações preservadas e ajustadas
+
+- Mantido `.github/workflows/validate.yml`, renderizando todos os
+  `kustomization.yaml` e executando `yamllint`.
+- Mantido overlay legado `overlays/cluster` como compatibilidade, mas o padrão
+  primário passa a ser `overlays/desenvolvimento`.

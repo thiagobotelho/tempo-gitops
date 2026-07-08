@@ -11,7 +11,7 @@ spec:
   storage:
     traces:
       backend: pv
-      size: 10Gi
+      size: 25Gi
   ingestion:
     otlp:
       grpc:
