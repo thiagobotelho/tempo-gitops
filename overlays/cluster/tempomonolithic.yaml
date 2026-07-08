@@ -2,15 +2,15 @@ apiVersion: tempo.grafana.com/v1alpha1
 kind: TempoMonolithic
 metadata:
   name: tempo-monolithic
-  namespace: openshift-tempo-operator
+  namespace: tempo
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   management: Managed
+  timeout: 60s
   storage:
     traces:
       backend: pv
-      # Retenção em PV local: pequeno o bastante para CRC e persistente.
       size: 10Gi
       storageClassName: crc-csi-hostpath-provisioner
   ingestion:
@@ -19,6 +19,14 @@ spec:
         enabled: true
       http:
         enabled: true
+        tls:
+          enabled: false
+  multitenancy:
+    enabled: true
+    mode: openshift
+    authentication:
+      - tenantName: dev
+        tenantId: "11111111-1111-1111-1111-111111111111"
   jaegerui:
     enabled: false
     route:
