@@ -67,17 +67,16 @@ rules:
       - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: ClusterRoleBinding
 metadata:
-  name: tempo-dev-traces-reader
+  name: tempo-dev-traces-writer-otel-collector
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-rules:
-  - apiGroups:
-      - tempo.grafana.com
-    resources:
-      - dev
-    resourceNames:
-      - traces
-    verbs:
-      - get
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tempo-dev-traces-writer
+subjects:
+  - kind: ServiceAccount
+    name: otel-collector-collector
+    namespace: observability
