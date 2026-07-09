@@ -40,6 +40,10 @@ spec:
   extraConfig:
     tempo:
       metrics_generator:
+        processor:
+          local_blocks:
+            filter_server_spans: false
+            flush_to_storage: true
         storage:
           path: /var/tempo/generator/wal
         processor:
