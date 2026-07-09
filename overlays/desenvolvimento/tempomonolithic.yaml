@@ -53,7 +53,8 @@ spec:
       query_frontend:
         metrics:
           max_duration: 24h
-          query_backend_after: 0s
+          query_backend_after: 30m
+          max_exemplars: 100
           concurrent_jobs: 8
           target_bytes_per_job: 134217728
           interval: 5m
