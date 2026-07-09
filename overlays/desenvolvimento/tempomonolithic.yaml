@@ -39,6 +39,17 @@ spec:
         enabled: true
   extraConfig:
     tempo:
+      metrics_generator:
+        storage:
+          path: /var/tempo/generator/wal
+        processor:
+          local_blocks:
+            flush_to_storage: true
+      overrides:
+        defaults:
+          metrics_generator:
+            processors:
+              - local-blocks
       query_frontend:
         metrics:
           max_duration: 24h
