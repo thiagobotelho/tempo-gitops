@@ -37,3 +37,15 @@ spec:
         enabled: true
       prometheusRules:
         enabled: true
+  extraConfig:
+    tempo:
+      query_frontend:
+        metrics:
+          max_duration: 24h
+          query_backend_after: 0s
+          concurrent_jobs: 8
+          target_bytes_per_job: 134217728
+          interval: 5m
+      querier:
+        metrics:
+          concurrent_blocks: 2
