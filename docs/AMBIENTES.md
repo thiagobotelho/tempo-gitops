@@ -21,6 +21,9 @@ Decisões:
 
 - `storageClassName` não é fixado; o cluster escolhe a StorageClass padrão ou o overlay deve patchar uma classe específica.
 - O health check do datasource Tempo no Grafana pode retornar `404` no gateway multi-tenant do Operator; valide traces reais e pods/Services.
+- `extraConfig` de metrics generator/local blocks/query frontend é mantido nos
+  três overlays; não remova de aceite/producao sem validar TraceQL Metrics,
+  exemplares e drilldown no Grafana.
 - `TempoMonolithic` é mantido no CRC para evitar object storage obrigatório.
   `TempoStack` exige MinIO/S3/Azure/GCS/OpenShift Data Foundation e tenants
   configurados; use-o quando houver necessidade de HA, retenção formal e

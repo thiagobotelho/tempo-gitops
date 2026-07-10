@@ -37,3 +37,30 @@ spec:
         enabled: true
       prometheusRules:
         enabled: true
+  extraConfig:
+    tempo:
+      metrics_generator:
+        storage:
+          path: /var/tempo/generator/wal
+        traces_storage:
+          path: /var/tempo/generator/traces
+        processor:
+          local_blocks:
+            filter_server_spans: false
+            flush_to_storage: true
+      overrides:
+        defaults:
+          metrics_generator:
+            processors:
+              - local-blocks
+      query_frontend:
+        metrics:
+          max_duration: 24h
+          query_backend_after: 30m
+          max_exemplars: 100
+          concurrent_jobs: 8
+          target_bytes_per_job: 134217728
+          interval: 5m
+      querier:
+        metrics:
+          concurrent_blocks: 2

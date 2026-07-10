@@ -53,6 +53,11 @@ métricas RED contínuas que alimentam navegação, dashboards e links de
 `tracesToMetrics` vêm do connector `span_metrics` do repositório
 `opentelemetry-gitops`.
 
+Os três overlays mantêm o mesmo `extraConfig` para `metrics_generator`,
+`local_blocks`, métricas no `query_frontend` e limite de exemplares. Os valores
+específicos por ambiente ficam restritos a capacidade/sizing, como tamanho de
+PVC.
+
 O Service Graph completo exige métricas de grafo (`traces_service_graph_*`)
 geradas pelo Tempo metrics-generator, Grafana Alloy ou outro pipeline
 compatível. No CRC atual eu mantive `TempoMonolithic`: ele é leve, usa PVC
