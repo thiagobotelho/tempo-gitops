@@ -104,3 +104,9 @@ oc apply --dry-run=client -k overlays/desenvolvimento
 overlay deve patchar a classe. `aceite` e `producao` aumentam o tamanho do PVC,
 mas produção real deve avaliar `TempoStack` com object storage/HA. Veja
 `docs/AMBIENTES.md`.
+
+## Integração opcional com Service Mesh
+
+O laboratório [service-mesh-gitops](https://github.com/thiagobotelho/service-mesh-gitops) envia spans pelo OpenTelemetry Collector existente, preservando o gateway autenticado e a validação TLS do Tempo. Não criar outra instância Tempo. O dashboard usa link relativo de Explore para o datasource tempo; links não comprovam traces reais.
+
+A validação do novo fluxo exige requisição de httpbin via proxy, consulta do trace no Tempo e revisão de contexto/headers. Essa validação ainda está pendente; a integração anterior de outros workloads não constitui evidência deste laboratório.
