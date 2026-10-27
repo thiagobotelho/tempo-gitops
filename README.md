@@ -60,7 +60,7 @@ PVC.
 
 O Service Graph completo exige métricas de grafo (`traces_service_graph_*`)
 geradas pelo Tempo metrics-generator, Grafana Alloy ou outro pipeline
-compatível. No CRC atual eu mantive `TempoMonolithic`: ele é leve, usa PVC
+compatível. O perfil de desenvolvimento usa `TempoMonolithic`: ele reduz dependências e usa PVC
 local e evita introduzir MinIO/S3 apenas para laboratório.
 
 TraceQL metrics e recursos recentes de Traces Drilldown variam com a versão do
@@ -109,4 +109,5 @@ mas produção real deve avaliar `TempoStack` com object storage/HA. Veja
 
 O laboratório [service-mesh-gitops](https://github.com/thiagobotelho/service-mesh-gitops) envia spans pelo OpenTelemetry Collector existente, preservando o gateway autenticado e a validação TLS do Tempo. Não criar outra instância Tempo. O dashboard usa link relativo de Explore para o datasource tempo; links não comprovam traces reais.
 
-A validação do novo fluxo exige requisição de httpbin via proxy, consulta do trace no Tempo e revisão de contexto/headers. Essa validação ainda está pendente; a integração anterior de outros workloads não constitui evidência deste laboratório.
+A validação do novo fluxo exige requisição de httpbin via proxy, consulta do trace no Tempo e revisão de contexto/headers. Consulte o trace no Tempo e confira os atributos de serviço e a propagação de contexto.
+
