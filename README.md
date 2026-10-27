@@ -111,3 +111,7 @@ O laboratório [service-mesh-gitops](https://github.com/thiagobotelho/service-me
 
 A validação do novo fluxo exige requisição de httpbin via proxy, consulta do trace no Tempo e revisão de contexto/headers. Consulte o trace no Tempo e confira os atributos de serviço e a propagação de contexto.
 
+
+## Aprender a configuração
+
+Consulte o [guia comentado](docs/APRENDIZADO.md) para entender componentes, escolhas, testes positivos/negativos e reversão.
