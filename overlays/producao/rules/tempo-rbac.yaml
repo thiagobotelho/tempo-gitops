@@ -2,8 +2,6 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: grafana-tempo
-  # Namespace deste objeto; não confundir com seleção de namespaces de origem.
-  # Namespace deste objeto; não confundir com seleção de namespaces de origem.
   namespace: grafana
   annotations:
     argocd.argoproj.io/sync-wave: "3"
@@ -28,7 +26,6 @@ rules:
   - apiGroups:
       - tempo.grafana.com
     # Recursos ou dependências desta seção; avaliar seu escopo antes de alterar.
-    # Recursos ou dependências desta seção; avaliar seu escopo antes de alterar.
     resources:
       - dev
     resourceNames:
@@ -43,12 +40,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 # Referência de permissão; este vínculo não cria identidades no provedor.
-# Referência de permissão; este vínculo não cria identidades no provedor.
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: tempo-dev-traces-reader
-# Identidades que recebem as permissões declaradas pelo papel referenciado.
 # Identidades que recebem as permissões declaradas pelo papel referenciado.
 subjects:
   - kind: ServiceAccount

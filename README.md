@@ -36,7 +36,7 @@ com exemplares. O Grafana correlaciona métricas, traces e logs.
 ```bash
 oc apply -k overlays/desenvolvimento
 oc -n openshift-tempo-operator get subscription,csv,pods
-oc -n openshift-tempo-operator get tempomonolithic,pvc,service
+oc -n tempo get tempomonolithic,pvc,service
 ```
 
 Validação declarativa:
@@ -115,3 +115,7 @@ A validação do novo fluxo exige requisição de httpbin via proxy, consulta do
 ## Aprender a configuração
 
 Consulte o [guia comentado](docs/APRENDIZADO.md) para entender componentes, escolhas, testes positivos/negativos e reversão.
+
+## Diagnóstico integrado de rede e mesh
+
+Consulte o [guia de observabilidade do mesh](https://github.com/thiagobotelho/service-mesh-gitops/blob/main/docs/OBSERVABILIDADE.md) para correlacionar NetworkPolicy, logs de proxies, mTLS, autorização HTTP e traces, com as fontes de dados corretas.
