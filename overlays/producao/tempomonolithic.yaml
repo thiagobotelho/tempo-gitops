@@ -2,8 +2,6 @@ apiVersion: tempo.grafana.com/v1alpha1
 kind: TempoMonolithic
 metadata:
   name: tempo-monolithic
-  # Namespace deste objeto; não confundir com seleção de namespaces de origem.
-  # Namespace deste objeto; não confundir com seleção de namespaces de origem.
   namespace: tempo
   annotations:
     argocd.argoproj.io/sync-wave: "4"
@@ -20,7 +18,6 @@ spec:
         enabled: true
       http:
         enabled: true
-        # TLS define transporte e confiança; não desabilitar validação para contornar erros.
         # TLS define transporte e confiança; não desabilitar validação para contornar erros.
         tls:
           enabled: false
@@ -55,7 +52,6 @@ spec:
       overrides:
         defaults:
           metrics_generator:
-            # A ordem de processamento influencia memória, descarte e agrupamento de dados.
             # A ordem de processamento influencia memória, descarte e agrupamento de dados.
             processors:
               - local-blocks
